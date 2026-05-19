@@ -1,0 +1,174 @@
+---
+title: "Class08: Breast Cancer Mini Project"
+author: "Yassaman Fakhari (PID A18541145)"
+format: pdf
+toc: true
+---
+
+## Background
+
+The goal of this mini-project is for you to explore a complete analysis using the unsupervised learning techniques covered in class.
+
+Today we will analyze a biopsy dataset from fine needle aspiration (FNA) of a breast mass.
+
+## Data Import
+
+The data is made available as a CSV file for download. We can read this using 'read.csv()':
+```{r}
+wisc.df <- read.csv("WisconsinCancer.csv")
+```
+
+```{r}
+head(wisc.df, 3)
+```
+
+Make sure we remove or exclude the diagnosis column from the datat set that we use for further analysis - this is the expert diagnosis as either M or B. 
+
+```{r}
+wisc.data <- wisc.df[,-c(1,2)]
+diagnosis <- as.factor(wisc.df$diagnosis)
+```
+
+## Exploratory Data Analysis
+
+> Q1. How many observations are in this dataset?
+
+```{r}
+nrow(wisc.data)
+```
+
+> Q2. How many of the observations have a malignant diagnosis?
+
+```{r}
+table(wisc.df$diagnosis)
+```
+
+> Q3. How many variables/features in the data are suffixed with '_mean'?
+
+We can use 'grep()' function to help us here:
+
+```{r}
+colnames(wisc.data)
+```
+
+```{r}
+length(grep("_mean", colnames(wisc.data), value = T))
+```
+
+## Principal Component Analysis (PCA)
+
+We need to scale out data before PCA with the 'scale=TRUE' argument to 'prcomp()'.
+
+```{r}
+wisc.pr <- prcomp(wisc.data, scale = TRUE)
+summary(wisc.pr)
+```
+
+> Q4. From your results, what proportion of the original variance is captured by the first principal component (PC1)?
+
+0.4427, The first principal component (PC1) captures approximately 44.27% of the total variance in the data.
+
+> Q5. How many principal components (PCs) are required to describe at least 70% of the original variance in the data?
+
+At least 70% variance is explained by the first 3 principal components.
+
+> Q6. How many principal components (PCs) are required to describe at least 90% of the original variance in the data?
+
+At least 90% variance is explained by the first 7 principal components.
+
+Let's see the biplot
+
+```{r}
+biplot(wisc.pr)
+```
+
+> Q7. What stands out to you about this plot? Is it easy or difficult to understand? Why?
+
+The biplot is difficult to interpret because it is very cluttered, with many overlapping labels for both observations and variables. This makes it hard to clearly see patterns or groupings in the data. While it contains a lot of information, the visual complexity makes it challenging to extract meaningful insights compared to simpler PCA plots like PC1 vs PC2.
+
+Let's see the 'PC score plot'
+
+```{r}
+library(ggplot2)
+
+ggplot(wisc.pr$x) +
+  aes(PC1, PC2, col=diagnosis) +
+  geom_point()
+```
+
+> Q8. Generate a similar plot for principal components 1 and 3. What do you notice about these plots?
+
+The PC1 vs PC3 plot shows less clear separation between malignant and benign samples compared to the PC1 vs PC2 plot. While PC1 still captures the main variation and helps distinguish the groups, PC3 does not add much additional separation. This suggests that PC2 is more informative than PC3 for distinguishing between the two diagnoses, and most of the important structure in the data is captured by PC1 and PC2.
+
+## Variance explained
+
+A scree plot shows how much variance each PC captures. We typically look for an “elbow” — a point where adding more PCs gives diminishing returns. This can help us decide how many PCs to consider for further analysis.
+
+Calculate variance of each component
+
+```{r}
+pr.var <- wisc.pr$sdev^2
+head(pr.var)
+```
+
+```{r}
+pve <- pr.var / sum(pr.var)
+
+plot(c(1, pve), 
+     xlab = "Principal Component", 
+     ylab = "Proportion of Variance Explained", 
+     ylim = c(0, 1), 
+     type = "o")
+```
+
+```{r}
+barplot(pve, 
+        ylab = "Percent of Variance Explained",
+        names.arg = paste0("PC", 1:length(pve)), 
+        las = 2, 
+        axes = FALSE)
+
+axis(2, at = pve, labels = round(pve, 2) * 100)
+```
+
+> Q9. For the first principal component, what is the component of the loading vector (i.e. wisc.pr$rotation[,1]) for the feature concave.points_mean? This tells us how much this original feature contributes to the first PC. Are there any features with larger contributions than this one?
+
+The loading of concave.points_mean on the first principal component is approximately 0.26, indicating it contributes strongly to PC1. Yes, there are a few features with slightly larger contributions (such as radius_mean, perimeter_mean, and area_mean), but concave.points_mean is among the most influential features driving variation in PC1.
+
+## Hierarchal Clustering 
+
+```{r}
+wisc.hclust <- hclust( dist( scale(wisc.data)))
+plot(wisc.hclust)
+```
+
+> Q10. Using the plot() and abline() functions, what is the height at which the clustering model has 4 clusters?
+
+The clustering model has approximately 4 clusters at a height around 15–18, based on where a horizontal cut through the dendrogram separates the data into four main groups.
+
+## Combining Methods
+
+```{r}
+d <- dist(wisc.pr$x[,1:4])
+wisc.pr.hclust <- hclust(d, method = "ward.D2")
+plot(wisc.pr.hclust)
+abline(h=70, col="red")
+```
+
+```{r}
+grps <- cutree(wisc.pr.hclust, h=70)
+table(grps)
+```
+
+How does this clustering 'grps' correspond to the diagnosis.
+
+```{r}
+table(diagnosis)
+```
+
+```{r}
+table(diagnosis, grps)
+```
+
+
+

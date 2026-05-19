@@ -1,0 +1,90 @@
+---
+title: "Class14: RNASeq Mini Project"
+author: "Yassaman Fakhari (PID A18541145)"
+format: pdf
+toc: true
+---
+
+## Background 
+
+In today's mini project we will analyze data fromm GEO entry: GSE37704, which is associated with the following publication:
+
+> Trapnell C, Hendrickson DG, Sauvageau M, Goff L et al. "Differential analysis of gene regulation at transcript resolution with RNA-seq". Nat Biotechnol 2013 Jan;31(1):46-53. PMID: 23222703
+
+The authors report on differential analysis of lung fibroblasts in response to loss of the developmental transcription factor HOXA1.
+
+## Data Import 
+
+Read counts and metadata CSV files 
+
+```{r}
+library(DESeq2)
+```
+
+```{r}
+metaFile <- "GSE37704_metadata.csv"
+countFile <- "GSE37704_featurecounts.csv"
+
+colData = read.csv(metaFile, row.names=1)
+head(colData)
+```
+
+```{r}
+countData = read.csv(countFile, row.names=1)
+head(countData)
+```
+
+Hmm... remember that we need the countData and colData files to match up so we will need to remove that odd first column in countData namely countData$length.
+
+```{r}
+countData <- as.matrix(countData[, -1])
+head(countData)
+```
+
+```{r}
+countData = countData[rowSums(countData) > 0, ]
+head(countData)
+```
+
+### Sanity Check 
+
+```{r}
+metadata
+```
+
+## Setup DESeq Object 
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData = countData,
+                              colData = colData,
+                              design = ~ condition)
+
+dds <- DESeq(dds)
+dds
+```
+
+```{r}
+res = results(dds)
+summary(res)
+```
+
+## Run DESeq Analysis Pipeline 
+
+## Extract the results 
+
+Big table with log2fc and pvalues 
+
+## Data Visualization 
+
+volcano plot 
+
+## Add Annotation Data 
+
+
+add gene symbol and entrez ids
+
+## Pathway Analysis
+
+KEGG, GO and REACTOME
+
+## Save Our Results 

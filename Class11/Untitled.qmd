@@ -1,0 +1,22 @@
+---
+title: "Class11"
+author: "Yassaman Fakhari (A18541145)"
+format: pdf
+toc: true
+---
+
+```{r}
+library(bio3d)
+
+pdb <- read.pdb("test_94b5b.result.zip")
+pdb
+```
+
+Make a vector of input PDB file name sthat we an read into R
+
+```{r}
+pdb.files <- list.files("test_94b5b.result.zip", 
+                        pattern = ".pdb",
+                        full.names = TRUE)
+```
+

@@ -1,0 +1,61 @@
+---
+title: "Class13"
+author: "Yassaman Fakhari (PID A18541145)"
+format: pdf
+toc: true
+---
+
+## Background
+
+Today we're going to do an RNA-seq analysis of a data set on the common glucorticois steroid dexamethasone (dex), and we'll use DESeq for this analysis.
+
+## Data Import 
+
+Let's read the `count` data and `metadata` about this experiment setup from the supplied CVS files:
+
+```{r}
+counts<- read.csv("airway_scaledcounts.csv", row.names=1)
+metadata<- read.csv("airway_metadata.csv")
+```
+
+Have a wee peak:
+
+```{r}
+head(counts)
+```
+
+And the metadata that tells us what is actually in the columns or our `count` objects:
+
+```{r}
+metadata
+```
+
+> Q1. How many genes are in this dataset? 
+
+There are `r nrow(counts)` gene in this data set
+
+> Q2. How many ‘control’ cell lines do we have?
+
+```{r}
+sum( metadata$dex == "control")
+```
+
+```{r}
+table(metadata$dex)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
