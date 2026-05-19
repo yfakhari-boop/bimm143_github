@@ -1,0 +1,34 @@
+---
+title: "Class08: Breast Cancer Mini Project"
+author: "Yassaman Fakhari (PID A18541145)"
+format: pdf
+toc: true
+---
+
+## Background
+
+The goal of this mini-project is for you to explore a complete analysis using the unsupervised learning techniques covered in class.
+
+Today we will analyze a biopsy dataset from fine needle aspiration (FNA) of a breast mass.
+
+## Data Import
+
+
+The data is made available as a CSV file for download. We can read this using 'read.csv()':
+```{r}
+read.csv("WisconsinCancer.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
