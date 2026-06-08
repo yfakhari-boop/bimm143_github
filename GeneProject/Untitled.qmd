@@ -1,0 +1,73 @@
+---
+title: "Gene Project"
+author: "Yassaman Fakhari (PID A18541145)"
+format: html
+---
+
+```{r}
+library(bio3d)
+
+ali <- read.fasta("clustalo-I20260608-123838-0744-22172537-p1m.fa")
+
+id.mat <- seqidentity(ali)
+
+heatmap(
+  id.mat,
+  symm = TRUE,
+  margins = c(8,8),
+  main = "RBP4 Sequence Identity Heatmap"
+)
+```
+
+
+```{r}
+library(bio3d)
+
+# Read your aligned FASTA file from Q7
+aln <- read.fasta("clustalo-I20260608-123838-0744-22172537-p1m.fa")
+
+# Use Human RBP4 as the query sequence for PDB search
+human_seq <- aln$ali["Human_RBP4", ]
+
+# Remove gaps from the aligned sequence
+human_seq <- paste(human_seq[human_seq != "-"], collapse = "")
+
+# Search PDB for similar structures
+hits <- blast.pdb(human_seq)
+
+# Look at the results
+hits
+```
+
+```{r}
+# Plot BLAST hits
+plot.blast(hits)
+```
+
+```{r}
+names(hits)
+```
+
+```{r}
+head(hits$hit.tbl)
+```
+
+```{r}
+# Get top 3 unique PDB IDs from hit table
+top_hits <- unique(hits$hit.tbl$pdb.id)[1:3]
+
+top_hits
+```
+
+```{r}
+anno <- pdb.annotate(top_hits)
+
+anno
+```
+
+
+
+
+
+
+

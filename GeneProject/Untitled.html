@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yassaman Fakhari (PID A18541145)">
+
+<title>Gene Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Untitled_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Untitled_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Untitled_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Untitled_files/libs/quarto-html/popper.min.js"></script>
+<script src="Untitled_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Untitled_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Untitled_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Untitled_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Untitled_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Untitled_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Untitled_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Gene Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yassaman Fakhari (PID A18541145) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bio3d)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ali <span class="ot">&lt;-</span> <span class="fu">read.fasta</span>(<span class="st">"clustalo-I20260608-123838-0744-22172537-p1m.fa"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>id.mat <span class="ot">&lt;-</span> <span class="fu">seqidentity</span>(ali)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  id.mat,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">symm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">8</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"RBP4 Sequence Identity Heatmap"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Untitled_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bio3d)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read your aligned FASTA file from Q7</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>aln <span class="ot">&lt;-</span> <span class="fu">read.fasta</span>(<span class="st">"clustalo-I20260608-123838-0744-22172537-p1m.fa"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Human RBP4 as the query sequence for PDB search</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>human_seq <span class="ot">&lt;-</span> aln<span class="sc">$</span>ali[<span class="st">"Human_RBP4"</span>, ]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove gaps from the aligned sequence</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>human_seq <span class="ot">&lt;-</span> <span class="fu">paste</span>(human_seq[human_seq <span class="sc">!=</span> <span class="st">"-"</span>], <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Search PDB for similar structures</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="fu">blast.pdb</span>(human_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Searching ... please wait (updates every 5 seconds) RID = 2E1U7B40014 
+ ..
+ Reporting 38 hits</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the results</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>hits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$hit.tbl
+         queryid subjectids identity alignmentlength mismatches gapopens
+1  Query_5714695     4O9S_A   97.312             186          4        1
+2  Query_5714695     3FMZ_A   97.312             186          4        1
+3  Query_5714695     6QBA_A   98.361             183          2        1
+4  Query_5714695     1JYD_A   98.352             182          2        1
+5  Query_5714695     1BRP_A   98.352             182          2        1
+6  Query_5714695     1JYJ_A   97.253             182          4        1
+7  Query_5714695     1QAB_E   96.667             180          5        1
+8  Query_5714695     2WQA_E   97.740             177          3        1
+9  Query_5714695     3BSZ_E   98.295             176          2        1
+10 Query_5714695     2WR6_A   97.714             175          3        1
+11 Query_5714695     2WQ9_A   98.276             174          2        1
+12 Query_5714695     1AQB_A   92.350             183         13        1
+13 Query_5714695     1HBQ_A   91.803             183         14        1
+14 Query_5714695     1ERB_A   91.803             183         14        1
+15 Query_5714695     1KT5_A   92.571             175         12        1
+16 Query_5714695     1RLB_E   91.954             174         13        1
+17 Query_5714695     1IIU_A   86.628             172         22        1
+18 Query_5714695     7VNS_A   27.374             179        112        9
+19 Query_5714695   7O2Y_AAA   27.374             179        112        9
+20 Query_5714695     5EZ2_A   27.374             179        112        9
+21 Query_5714695     5F6Z_A   31.293             147         85        8
+22 Query_5714695     7VNL_A   27.374             179        112        9
+23 Query_5714695     7YX1_A   27.933             179        111        9
+24 Query_5714695     7O3K_A   26.816             179        113        9
+25 Query_5714695     2HZQ_A   27.891             147         76        8
+26 Query_5714695     1IW2_A   27.869             122         79        4
+27 Query_5714695     2OVD_A   26.549             113         76        3
+28 Query_5714695     2QOS_C   26.549             113         76        3
+29 Query_5714695     2OVA_A   26.446             121         82        3
+30 Query_5714695     4ES7_A   23.333             120         65        5
+31 Query_5714695     1GKA_B   24.581             179        114        8
+32 Query_5714695     3QKG_A   24.167             120         64        5
+33 Query_5714695     1JZU_A   26.667             150         75        8
+34 Query_5714695     3OJY_C   25.664             113         77        3
+35 Query_5714695     2RD7_C   25.664             113         77        3
+36 Query_5714695     8B0F_F   25.664             113         77        3
+37 Query_5714695     5NGH_A   21.429             154         96        6
+38 Query_5714695     5X7Y_A   22.619             168         92        6
+   q.start q.end s.start s.end    evalue bitscore positives mlog.evalue pdb.id
+1       16   200      30   215 2.63e-136    381.0     98.39 312.1845888 4O9S_A
+2       16   200      27   212 4.33e-136    380.0     98.39 311.6860051 3FMZ_A
+3       19   200       3   185 4.96e-135    377.0     99.45 309.2475818 6QBA_A
+4       19   199       2   183 1.38e-134    375.0     99.45 308.2243190 1JYD_A
+5       19   199       1   182 1.48e-134    375.0     99.45 308.1543604 1BRP_A
+6       19   199       2   183 1.66e-132    370.0     98.35 303.4344147 1JYJ_A
+7       22   200       1   180 3.67e-130    364.0     97.78 298.0358704 1QAB_E
+8       18   193       1   177 4.69e-130    364.0     98.87 297.7906295 2WQA_E
+9       19   193       1   176 7.42e-130    363.0     99.43 297.3318830 3BSZ_E
+10      18   191       1   175 2.20e-128    360.0     98.86 293.9424345 2WR6_A
+11      19   191       1   174 2.53e-128    359.0     99.43 293.8026726 2WQ9_A
+12      19   200       1   183 5.33e-128    359.0     95.63 293.0575407 1AQB_A
+13      19   200       1   183 2.53e-127    357.0     96.72 291.5000875 1HBQ_A
+14      19   200       1   183 3.84e-127    357.0     96.17 291.0828344 1ERB_A
+15      19   192       1   175 1.09e-121    343.0     96.00 278.5266186 1KT5_A
+16      19   191       1   174 1.47e-120    340.0     95.98 275.9249488 1RLB_E
+17      21   191       2   173 1.75e-113    322.0     94.19 259.6324997 1IIU_A
+18      23   197       7   171  7.97e-09     54.7     44.13  18.6475813 7VNS_A
+19      23   197       7   171  1.72e-08     53.5     44.13  17.8783565 7O2Y_a
+20      23   197       7   171  2.02e-08     53.5     44.13  17.7175832 5EZ2_A
+21      23   167       7   139  2.87e-08     52.8     46.94  17.3663687 5F6Z_A
+22      23   197       7   171  3.08e-08     53.1     44.13  17.2957511 7VNL_A
+23      23   197       7   171  4.11e-08     52.8     44.13  17.0072577 7YX1_A
+24      23   197       7   171  5.54e-08     52.4     44.13  16.7086862 7O3K_A
+25      29   165      11   137  1.97e-06     47.8     48.98  13.1374770 2HZQ_A
+26      24   143      13   127  4.00e-03     38.5     45.90   5.5214609 1IW2_A
+27      24   135      13   119  1.40e-02     37.0     44.25   4.2686979 2OVD_A
+28      24   135       4   110  1.50e-02     36.6     44.25   4.1997051 2QOS_C
+29      24   143      13   127  3.50e-02     35.8     42.98   3.3524072 2OVA_A
+30      26   133      36   140  5.50e-02     35.4     43.33   2.9004221 4ES7_A
+31      23   195      11   174  7.20e-02     34.7     39.66   2.6310892 1GKA_B
+32      26   133       9   113  1.10e-01     34.3     44.17   2.2072749 3QKG_A
+33      34   171       5   131  4.20e-01     32.3     38.00   0.8675006 1JZU_A
+34      24   135      13   119  4.60e-01     32.3     43.36   0.7765288 3OJY_C
+35      24   135      15   121  4.90e-01     32.3     43.36   0.7133499 2RD7_C
+36      24   135      33   139  4.90e-01     32.3     43.36   0.7133499 8B0F_F
+37      29   177       7   140  2.20e+00     30.4     41.56  -0.7884574 5NGH_A
+38      14   170       1   141  7.10e+00     28.9     37.50  -1.9600948 5X7Y_A
+        acc
+1    4O9S_A
+2    3FMZ_A
+3    6QBA_A
+4    1JYD_A
+5    1BRP_A
+6    1JYJ_A
+7    1QAB_E
+8    2WQA_E
+9    3BSZ_E
+10   2WR6_A
+11   2WQ9_A
+12   1AQB_A
+13   1HBQ_A
+14   1ERB_A
+15   1KT5_A
+16   1RLB_E
+17   1IIU_A
+18   7VNS_A
+19 7O2Y_AAA
+20   5EZ2_A
+21   5F6Z_A
+22   7VNL_A
+23   7YX1_A
+24   7O3K_A
+25   2HZQ_A
+26   1IW2_A
+27   2OVD_A
+28   2QOS_C
+29   2OVA_A
+30   4ES7_A
+31   1GKA_B
+32   3QKG_A
+33   1JZU_A
+34   3OJY_C
+35   2RD7_C
+36   8B0F_F
+37   5NGH_A
+38   5X7Y_A
+
+$raw
+         queryid subjectids identity alignmentlength mismatches gapopens
+1  Query_5714695     4O9S_A   97.312             186          4        1
+2  Query_5714695     3FMZ_A   97.312             186          4        1
+3  Query_5714695     6QBA_A   98.361             183          2        1
+4  Query_5714695     1JYD_A   98.352             182          2        1
+5  Query_5714695     1BRP_A   98.352             182          2        1
+6  Query_5714695     1JYJ_A   97.253             182          4        1
+7  Query_5714695     1QAB_E   96.667             180          5        1
+8  Query_5714695     2WQA_E   97.740             177          3        1
+9  Query_5714695     3BSZ_E   98.295             176          2        1
+10 Query_5714695     2WR6_A   97.714             175          3        1
+11 Query_5714695     2WQ9_A   98.276             174          2        1
+12 Query_5714695     1AQB_A   92.350             183         13        1
+13 Query_5714695     1HBQ_A   91.803             183         14        1
+14 Query_5714695     1ERB_A   91.803             183         14        1
+15 Query_5714695     1KT5_A   92.571             175         12        1
+16 Query_5714695     1RLB_E   91.954             174         13        1
+17 Query_5714695     1IIU_A   86.628             172         22        1
+18 Query_5714695     7VNS_A   27.374             179        112        9
+19 Query_5714695   7O2Y_AAA   27.374             179        112        9
+20 Query_5714695     5EZ2_A   27.374             179        112        9
+21 Query_5714695     5F6Z_A   31.293             147         85        8
+22 Query_5714695     7VNL_A   27.374             179        112        9
+23 Query_5714695     7YX1_A   27.933             179        111        9
+24 Query_5714695     7O3K_A   26.816             179        113        9
+25 Query_5714695     2HZQ_A   27.891             147         76        8
+26 Query_5714695     1IW2_A   27.869             122         79        4
+27 Query_5714695     2OVD_A   26.549             113         76        3
+28 Query_5714695     2QOS_C   26.549             113         76        3
+29 Query_5714695     2OVA_A   26.446             121         82        3
+30 Query_5714695     4ES7_A   23.333             120         65        5
+31 Query_5714695     1GKA_B   24.581             179        114        8
+32 Query_5714695     3QKG_A   24.167             120         64        5
+33 Query_5714695     1JZU_A   26.667             150         75        8
+34 Query_5714695     3OJY_C   25.664             113         77        3
+35 Query_5714695     2RD7_C   25.664             113         77        3
+36 Query_5714695     8B0F_F   25.664             113         77        3
+37 Query_5714695     5NGH_A   21.429             154         96        6
+38 Query_5714695     5X7Y_A   22.619             168         92        6
+   q.start q.end s.start s.end    evalue bitscore positives
+1       16   200      30   215 2.63e-136    381.0     98.39
+2       16   200      27   212 4.33e-136    380.0     98.39
+3       19   200       3   185 4.96e-135    377.0     99.45
+4       19   199       2   183 1.38e-134    375.0     99.45
+5       19   199       1   182 1.48e-134    375.0     99.45
+6       19   199       2   183 1.66e-132    370.0     98.35
+7       22   200       1   180 3.67e-130    364.0     97.78
+8       18   193       1   177 4.69e-130    364.0     98.87
+9       19   193       1   176 7.42e-130    363.0     99.43
+10      18   191       1   175 2.20e-128    360.0     98.86
+11      19   191       1   174 2.53e-128    359.0     99.43
+12      19   200       1   183 5.33e-128    359.0     95.63
+13      19   200       1   183 2.53e-127    357.0     96.72
+14      19   200       1   183 3.84e-127    357.0     96.17
+15      19   192       1   175 1.09e-121    343.0     96.00
+16      19   191       1   174 1.47e-120    340.0     95.98
+17      21   191       2   173 1.75e-113    322.0     94.19
+18      23   197       7   171  7.97e-09     54.7     44.13
+19      23   197       7   171  1.72e-08     53.5     44.13
+20      23   197       7   171  2.02e-08     53.5     44.13
+21      23   167       7   139  2.87e-08     52.8     46.94
+22      23   197       7   171  3.08e-08     53.1     44.13
+23      23   197       7   171  4.11e-08     52.8     44.13
+24      23   197       7   171  5.54e-08     52.4     44.13
+25      29   165      11   137  1.97e-06     47.8     48.98
+26      24   143      13   127  4.00e-03     38.5     45.90
+27      24   135      13   119  1.40e-02     37.0     44.25
+28      24   135       4   110  1.50e-02     36.6     44.25
+29      24   143      13   127  3.50e-02     35.8     42.98
+30      26   133      36   140  5.50e-02     35.4     43.33
+31      23   195      11   174  7.20e-02     34.7     39.66
+32      26   133       9   113  1.10e-01     34.3     44.17
+33      34   171       5   131  4.20e-01     32.3     38.00
+34      24   135      13   119  4.60e-01     32.3     43.36
+35      24   135      15   121  4.90e-01     32.3     43.36
+36      24   135      33   139  4.90e-01     32.3     43.36
+37      29   177       7   140  2.20e+00     30.4     41.56
+38      14   170       1   141  7.10e+00     28.9     37.50
+
+$url
+                                                                                                                                                                          2E1U7B40014 
+"https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&amp;FORMAT_OBJECT=Alignment&amp;ALIGNMENT_VIEW=Tabular&amp;RESULTS_FILE=on&amp;FORMAT_TYPE=CSV&amp;ALIGNMENTS=20000&amp;DESCRIPTIONS=20000&amp;RID=2E1U7B40014" 
+
+attr(,"class")
+[1] "blast"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot BLAST hits</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.blast</span>(hits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  * Possible cutoff values:    259 -2 
+            Yielding Nhits:    17 38 
+
+  * Chosen cutoff value of:    259 
+            Yielding Nhits:    17 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Untitled_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(hits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hit.tbl" "raw"     "url"    </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hits<span class="sc">$</span>hit.tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        queryid subjectids identity alignmentlength mismatches gapopens q.start
+1 Query_5714695     4O9S_A   97.312             186          4        1      16
+2 Query_5714695     3FMZ_A   97.312             186          4        1      16
+3 Query_5714695     6QBA_A   98.361             183          2        1      19
+4 Query_5714695     1JYD_A   98.352             182          2        1      19
+5 Query_5714695     1BRP_A   98.352             182          2        1      19
+6 Query_5714695     1JYJ_A   97.253             182          4        1      19
+  q.end s.start s.end    evalue bitscore positives mlog.evalue pdb.id    acc
+1   200      30   215 2.63e-136      381     98.39    312.1846 4O9S_A 4O9S_A
+2   200      27   212 4.33e-136      380     98.39    311.6860 3FMZ_A 3FMZ_A
+3   200       3   185 4.96e-135      377     99.45    309.2476 6QBA_A 6QBA_A
+4   199       2   183 1.38e-134      375     99.45    308.2243 1JYD_A 1JYD_A
+5   199       1   182 1.48e-134      375     99.45    308.1544 1BRP_A 1BRP_A
+6   199       2   183 1.66e-132      370     98.35    303.4344 1JYJ_A 1JYJ_A</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get top 3 unique PDB IDs from hit table</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>top_hits <span class="ot">&lt;-</span> <span class="fu">unique</span>(hits<span class="sc">$</span>hit.tbl<span class="sc">$</span>pdb.id)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>top_hits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "4O9S_A" "3FMZ_A" "6QBA_A"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>anno <span class="ot">&lt;-</span> <span class="fu">pdb.annotate</span>(top_hits)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>anno</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       structureId chainId macromoleculeType chainLength experimentalTechnique
+4O9S_A        4O9S       A           Protein         215                 X-ray
+3FMZ_A        3FMZ       A           Protein         212                 X-ray
+6QBA_A        6QBA       A           Protein         185                 X-ray
+       resolution        scopDomain
+4O9S_A        2.3 automated matches
+3FMZ_A        2.9 automated matches
+6QBA_A        1.8 automated matches
+                                                                      pfam
+4O9S_A Lipocalin / cytosolic fatty-acid binding protein family (Lipocalin)
+3FMZ_A Lipocalin / cytosolic fatty-acid binding protein family (Lipocalin)
+6QBA_A Lipocalin / cytosolic fatty-acid binding protein family (Lipocalin)
+                      ligandId
+4O9S_A 2RY,EDO (13),CL (2),PEG
+3FMZ_A                     2T1
+6QBA_A  2T1,IMD (5),PEG,ZN (3)
+                                                                                                                                                                                                ligandName
+4O9S_A 1-[4-(7-thia-9,11-diazatricyclo[6.4.0.0^{2,6}]dodeca-1(12),2(6),8,10-tetraen-12-yl)piperazin-1-yl]-2-[2-(trifluoromethyl)phenyl]ethanone,1,2-ETHANEDIOL (13),CHLORIDE ION (2),DI(HYDROXYETHYL)ETHER
+3FMZ_A                                                                                                                        2-[({4-[2-(trifluoromethyl)phenyl]piperidin-1-yl}carbonyl)amino]benzoic acid
+6QBA_A                                                                       2-[({4-[2-(trifluoromethyl)phenyl]piperidin-1-yl}carbonyl)amino]benzoic acid,IMIDAZOLE (5),DI(HYDROXYETHYL)ETHER,ZINC ION (3)
+             source
+4O9S_A Homo sapiens
+3FMZ_A Homo sapiens
+6QBA_A Homo sapiens
+                                                                                                                        structureTitle
+4O9S_A                                      Crystal structure of Retinol-Binding Protein 4 (RBP4)in complex with a non-retinoid ligand
+3FMZ_A                                       Crystal Structure of Retinol-Binding Protein 4 (RBP4) in complex with non-retinoid ligand
+6QBA_A Crystal Structure of Retinol-Binding Protein 4 (RBP4) in complex with non-retinoid ligand A1120 and engineered binding scaffold
+                                                 citation rObserved   rFree
+4O9S_A       Wang, Y., et al. Bioorg Med Chem Lett (2014)   0.23265 0.26072
+3FMZ_A        Motani, A., et al. J Biological Chem (2009)   0.22600 0.28600
+6QBA_A Zajc, C.U., et al. Proc Natl Acad Sci U S A (2020)   0.19010 0.22070
+         rWork spaceGroup
+4O9S_A 0.23116       P 65
+3FMZ_A 0.22300       P 65
+6QBA_A 0.18810 P 21 21 21</code></pre>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
