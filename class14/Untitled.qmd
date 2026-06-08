@@ -1,7 +1,7 @@
 ---
 title: "Class14: RNASeq Mini Project"
 author: "Yassaman Fakhari (PID A18541145)"
-format: pdf
+format: html
 toc: true
 ---
 

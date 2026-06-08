@@ -1,7 +1,7 @@
 ---
 title: "Class10: Structural Bioinformatics 1"
 author: "Yassaman Fakhari (PID A18541145)"
-format: pdf
+format: html
 toc: TRUE
 ---
 

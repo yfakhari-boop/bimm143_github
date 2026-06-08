@@ -1,7 +1,7 @@
 ---
 title: "Class06: R Functions Lab"
 author: "Yassaman Fakhari (PID A18541145)"
-format: pdf
+format: html
 toc: TRUE
 editor: 
   markdown: 
